@@ -11,30 +11,34 @@ from moderArcs.VGG import VGG
 
 
 def classify(image, model_name):
+    # model = AlexNet()  
+    # model.to(device)
+    # model = model.load_state_dict(torch.load('models/alexnet.pth'))
+    # model.eval()
     
-    # device = torch.device('cpu')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if model_name == 'alexnet':
         model = AlexNet()
-        # model.to(device) 
-        model.load_state_dict(torch.load('./models/alexnet.pth', map_location=torch.device('cpu')))
+        model.to(device) 
+        model.load_state_dict(torch.load('./models/alexnet.pth'))
         model.eval()
     elif model_name == 'vgg16':
         model = VGG("VGG16")
-        # model.to(device) 
-        model.load_state_dict(torch.load('./models/vgg16.pth', map_location=torch.device('cpu')))
+        model.to(device) 
+        model.load_state_dict(torch.load('./models/vgg16.pth'))
         model.eval()
     elif model_name == 'vgg19':
         model = VGG("VGG19")
-        # model.to(device) 
-        model.load_state_dict(torch.load('./models/vgg19.pth', map_location=torch.device('cpu')))
+        model.to(device) 
+        model.load_state_dict(torch.load('./models/vgg19.pth'))
         model.eval()
     elif model_name == 'resnet50':
         model = models.resnet50()
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, 10)
-        model.load_state_dict(torch.load("./models/model-driver", map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load("./models/model-driver"))
         model.eval()
-        # model.cuda()
+        model.cuda()
 
     
 
@@ -49,7 +53,7 @@ def classify(image, model_name):
     img = img.unsqueeze(0)
     # predict the class of the image
     # calculate inference time
-    # img = img.to(device)
+    img = img.to(device)
     
     starttime = datetime.now()
     pred = model(img)
