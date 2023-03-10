@@ -33,22 +33,22 @@ if file_up is not None:
 
         pred1, inf1 = classify(image, "alexnet")
 
-        st.write(labels[pred1], "\ntime: ", inf1, "s")
+        st.write(labels[pred1], "\n\ntime: ", inf1, "s")
     with col2:
         st.markdown(VGG16Title, unsafe_allow_html=True)
         
         pred2, inf2 = classify(image, "vgg16")
 
-        st.write(labels[pred2], "\ntime: ", inf2, "s")
+        st.write(labels[pred2], "\n\ntime: ", inf2, "s")
     with col3:
         st.markdown(VGG19Title, unsafe_allow_html=True)
 
         pred3, inf3 = classify(image, "vgg19")
 
-        st.write(labels[pred3], "\ntime: ", inf3, "s")
+        st.write(labels[pred3], "\n\ntime: ", inf3, "s")
     with col4:
         st.markdown(ResNetTitle, unsafe_allow_html=True)
 
         pred4, inf4 = classify(image, "resnet50")
 
-        st.write(labels[pred4], "\ntime: ", inf4, "s")
+        st.write(labels[pred4], "\n\ntime: ", inf4, "s")
